@@ -31,9 +31,15 @@ else :
     tele= a2*3600 + b2*60 + c2
     
 x = 90*3600
-max_ele = x + star - tele
+max_ele = x + star - tele  # Maximum elevation of the star in arcseconds
 
-l = divmod(max_ele,3600)
-m = divmod(l[1],60)
+if divmod(max_ele,3600)[0] < 90 :
+    l = divmod(max_ele,3600)
+    m = divmod(l[1],60)
+else :
+    max_ele = 180*3600 - max_ele
+    l = divmod(max_ele,3600)
+    m = divmod(l[1],60)
+
 print('Max_elevation',l[0],'deg',m[0],'min',m[1],'sec')
 
